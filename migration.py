@@ -86,8 +86,8 @@ def migration_all_date(areaname,classname,no,direction):
         time.sleep(1)
         url=f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={classname}&id={no}&type=move_{direction}&date={date}'
         print(url)
-        response=requests.get(url, timeout=10)
-        time.sleep(3)
+        response=requests.get(url, timeout=30)
+        time.sleep(1)
         r=response.text[3:-1]
         data_dict=json.loads(r)
         if data_dict['errmsg']=='SUCCESS':
@@ -139,9 +139,9 @@ if __name__=="__main__":
     # circu_exe_direction('山东省','province',370000)
 
     # circu_exe_direction('河南省','province',410000)
-    circu_exe_direction('湖北省','province',420000)
-    circu_exe_direction('湖南省','province',430000)
-    circu_exe_direction('广东省','province',440000)
+    # circu_exe_direction('湖北省','province',420000)
+    # circu_exe_direction('湖南省','province',430000)
+    # circu_exe_direction('广东省','province',440000)
     circu_exe_direction('广西自治区','province',450000)
     circu_exe_direction('海南省','province',460000)
 
