@@ -117,7 +117,10 @@ def migration_all_date(areaname,classname,no,direction):
     for date in datelist:
         datename = date
         time.sleep(1)
-        url=f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={classname}&id={no}&type=move_{direction}&date={date}'
+        # url=f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={classname}&id={no}&type=move_{direction}&date={date}'
+        # url=f'http://huiyan.baidu.com/migration/provincerank.jsonp?dt={classname}&id={no}&type=move_{direction}&date={date}'
+        url=f'http://huiyan.baidu.com/migration/historycurve.jsonp?dt={classname}&id={no}&type=move_{direction}'
+        # url=f'http://huiyan.baidu.com/migration/internalflowhistory.jsonp?dt={classname}&id={no}&&date={date}'
         print(url)
         response=requests.get(url, timeout=30)
         time.sleep(1)
@@ -125,7 +128,7 @@ def migration_all_date(areaname,classname,no,direction):
         data_dict=json.loads(r)
         if data_dict['errmsg']=='SUCCESS':
             data_list=data_dict['data']['list']
-            time.sleep(1)
+            time.sleep(3)
 
             worksheet.write(0 , counter_data , label=datename)
             for a in range(len(CitiesCode)):
@@ -190,8 +193,8 @@ if __name__=="__main__":
     # circu_exe_direction('宁夏自治区','province',640000)
     # circu_exe_direction('新疆自治区','province',650000)
 
-    circu_exe_direction('台湾省','province',710000)
-    circu_exe_direction('香港特别行政区','province',810000)
+    # circu_exe_direction('台湾省','province',710000)
+    # circu_exe_direction('香港特别行政区','province',810000)
     circu_exe_direction('澳门特别行政区','province',820000)
     
     print('All done!')
