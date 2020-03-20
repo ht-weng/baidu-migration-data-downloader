@@ -38,7 +38,7 @@ CitiesCode = {
     '乌鲁木齐市':650100,'克拉玛依市':650200,'吐鲁番市':650400,'哈密市':650500,'昌吉回族自治州':652300,'博尔塔拉蒙古自治州':652700,'巴音郭楞蒙古自治州':652800,'阿克苏地区':652900,'克孜勒苏柯尔克孜自治州':653000,'喀什地区':653100,'和田地区':653200,'伊犁哈萨克自治州':654000,'塔城地区':654200,'阿勒泰地区':654300,
     '石河子市':659001,'阿拉尔市':659002,'图木舒克市':659003,'五家渠市':659004,'北屯市':659005,'铁门关市':659006,'双河市':659007,'可克达拉市':659008,'昆玉市':659009,
     '台湾省':710000,'香港特别行政区':810000,'澳门特别行政区':820000
-    }
+}
 
 
 ProvinceCode = {
@@ -49,8 +49,17 @@ ProvinceCode = {
     '重庆市':500000,'四川省':510000,'贵州省':520000,'云南省':530000,'西藏自治区':540000,
     '陕西省':610000,'甘肃省':620000,'青海省':630000,'宁夏自治区':640000,'新疆自治区':650000,
     '台湾省':710000,'香港特别行政区':810000,'澳门特别行政区':820000
-    }
+}
 
+ProvinceName = {
+    '北京市':'Beijing','天津市':'Tianjin','河北省':'Hebei','山西省':'Shanxi','内蒙古自治区':'Inner Mongolia',
+    '辽宁省':'Liaoning','吉林省':'Jilin','黑龙江省':'Heilongjiang',
+    '上海市':'Shanghai','江苏省':'Jiangsu','浙江省':'Zhejiang','安徽省':'Anhui','福建省':'Fujian','江西省':'Jiangxi','山东省':'Shandong',
+    '河南省':'Henan','湖北省':'Hubei','湖南省':'Hunan','广东省':'Guangdong','广西自治区':'Guangxi','海南省':'Hainan',
+    '重庆市':'Chongqing','四川省':'Sichuan','贵州省':'Guizhou','云南省':'Yunnan','西藏自治区':'Tibet',
+    '陕西省':'Shaanxi','甘肃省':'Gansu','青海省':'Qinghai','宁夏自治区':'Ningxia','新疆自治区':'Xinjiang',
+    '台湾省':'Taiwan','香港特别行政区':'Hong Kong','澳门特别行政区':'Macau'
+}
 
 def migration_all_date(areaname,classname,no,direction):
     if no == -1 :
@@ -60,11 +69,11 @@ def migration_all_date(areaname,classname,no,direction):
     worksheet = workbook.add_sheet('Sheet', cell_overwrite_ok=True)
     
     if direction == 'in' :
-        nameofdire = '迁入来源地'
+        nameofdire = 'Inbound'
     if direction == 'out':
-        nameofdire = '迁出目的地'
+        nameofdire = 'Outbound'
     CitiesOrder = {}
-    worksheet.write(0 , 0 , label='城市代码')
+    worksheet.write(0 , 0 , label='CityCode')
     worksheet.write(0 , 1 , label=str(nameofdire))
     times = 1
     for key , value in CitiesCode.items():
@@ -74,13 +83,37 @@ def migration_all_date(areaname,classname,no,direction):
         times += 1
     
     datelist = []
-    counter_data = 3
-    for date1 in range(20200101,20200132):
+    counter_data = 6
+    # for date1 in range(20190101,20190132):
+    #     datelist.append(date1)
+    # for date2 in range(20190201,20190229):
+    #     datelist.append(date2)
+    # for date3 in range(20190301,20190332):
+    #     datelist.append(date3)
+    # for date4 in range(20190401,20190431):
+    #     datelist.append(date4)
+    # for date5 in range(20190501,20190532):
+    #     datelist.append(date5)
+    # for date6 in range(20190601,20190631):
+    #     datelist.append(date6)
+    # for date7 in range(20190701,20190732):
+    #     datelist.append(date7)
+    # for date8 in range(20190801,20190832):
+    #     datelist.append(date8)
+    # for date9 in range(20190901,20190931):
+    #     datelist.append(date9)
+    for date1 in range(20191001,20191032):
         datelist.append(date1)
-    for date2 in range(20200201,20200230):
+    for date2 in range(20191101,20191131):
         datelist.append(date2)
-    for date3 in range(20200301,20200317):
+    for date3 in range(20191201,20191232):
         datelist.append(date3)
+    for date4 in range(20200101,20200132):
+        datelist.append(date4)
+    for date5 in range(20200201,20200230):
+        datelist.append(date5)
+    for date6 in range(20200301,20200317):
+        datelist.append(date6)
     for date in datelist:
         datename = date
         time.sleep(1)
@@ -104,14 +137,14 @@ def migration_all_date(areaname,classname,no,direction):
             
                 worksheet.write(CitiesOrder[str(city_name)] , counter_data , label=value)
             counter_data += 1
-    workbook.save(f"data/{areaname}-{nameofdire}.xls")
+    workbook.save(f"data/{ProvinceName[areaname]}-{nameofdire}.xls")
 
 
 def circu_exe_direction(areaname,classname,no):
     mukous = ['in','out']
     for mukou in mukous:
         migration_all_date(areaname,classname,no,mukou)
-    print(str(areaname)+'---','完成')
+    print(str(areaname)+'---','Done')
 
 
 if __name__=="__main__":
@@ -142,23 +175,23 @@ if __name__=="__main__":
     # circu_exe_direction('湖北省','province',420000)
     # circu_exe_direction('湖南省','province',430000)
     # circu_exe_direction('广东省','province',440000)
-    circu_exe_direction('广西自治区','province',450000)
-    circu_exe_direction('海南省','province',460000)
+    # circu_exe_direction('广西自治区','province',450000)
+    # circu_exe_direction('海南省','province',460000)
 
-    circu_exe_direction('重庆市','province',500000)
-    circu_exe_direction('四川省','province',510000)
-    circu_exe_direction('贵州省','province',520000)
-    circu_exe_direction('云南省','province',530000)
-    circu_exe_direction('西藏自治区','province',540000)
+    # circu_exe_direction('重庆市','province',500000)
+    # circu_exe_direction('四川省','province',510000)
+    # circu_exe_direction('贵州省','province',520000)
+    # circu_exe_direction('云南省','province',530000)
+    # circu_exe_direction('西藏自治区','province',540000)
 
-    circu_exe_direction('陕西省','province',610000)
-    circu_exe_direction('甘肃省','province',620000)
-    circu_exe_direction('青海省','province',630000)
-    circu_exe_direction('宁夏自治区','province',640000)
-    circu_exe_direction('新疆自治区','province',650000)
+    # circu_exe_direction('陕西省','province',610000)
+    # circu_exe_direction('甘肃省','province',620000)
+    # circu_exe_direction('青海省','province',630000)
+    # circu_exe_direction('宁夏自治区','province',640000)
+    # circu_exe_direction('新疆自治区','province',650000)
 
     circu_exe_direction('台湾省','province',710000)
     circu_exe_direction('香港特别行政区','province',810000)
     circu_exe_direction('澳门特别行政区','province',820000)
     
-    print('全部完成')
+    print('All done!')
