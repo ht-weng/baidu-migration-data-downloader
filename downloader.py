@@ -3,11 +3,12 @@
 # -*- coding: utf-8 -*-
 import requests
 from datetime import datetime, timedelta
-import json 
+import json
 import time
 import xlrd
 import xlwt
 import csv
+
 
 city_code = {
     '北京市':110000, 
@@ -33,11 +34,11 @@ city_code = {
     '海口市':460100, '三亚市':460200, '三沙市':460300, '儋州市':460400, '五指山市':469001, '琼海市':469002, '文昌市':469005, '万宁市':469006, '东方市':469007, '定安县':469021, '屯昌县':469022, '澄迈县':469023, '临高县':469024, '白沙黎族自治县':469025, '昌江黎族自治县':469026, '乐东黎族自治县':469027, '陵水黎族自治县':469028, '保亭黎族苗族自治县':469029, '琼中黎族苗族自治县':469030, 
     '重庆市':500000, 
     '成都市':510100, '自贡市':510300, '攀枝花市':510400, '泸州市':510500, '德阳市':510600, '绵阳市':510700, '广元市':510800, '遂宁市':510900, '内江市':511000, '乐山市':511100, '南充市':511300, '眉山市':511400, '宜宾市':511500, '广安市':511600, '达州市':511700, '雅安市':511800, '巴中市':511900, '资阳市':512000, '阿坝藏族羌族自治州':513200, '甘孜藏族自治州':513300, '凉山彝族自治州':513400, 
-    '贵阳市':520100, '六盘水市':520200, '遵义市':520300, '安顺市':520400, '毕节市':520500, '铜仁市':520600, '黔西南布依族苗族自治州':522300, '黔东南苗族侗族自治州':522600, '黔南布依族苗族自治州':522700, 
+    '贵阳市':520100, '六盘水市':520200, '遵义市':520300, '安顺市':520400, '毕节市':520500, '铜仁市':520600, '黔西南州':522300, '黔东南州':522600, '黔南州':522700, 
     '昆明市':530100, '曲靖市':530300, '玉溪市':530400, '保山市':530500, '昭通市':530600, '丽江市':530700, '普洱市':530800, '临沧市':530900, '楚雄彝族自治州':532300, '红河哈尼族彝族自治州':532500, '文山壮族苗族自治州':532600, '西双版纳傣族自治州':532800, '大理白族自治州':532900, '德宏傣族景颇族自治州':533100, '怒江傈僳族自治州':533300, '迪庆藏族自治州':533400, 
     '拉萨市':540100, '日喀则市':540200, '昌都市':540300, '林芝市':540400, '山南市':540500, '那曲市':540600, '阿里地区':542500, 
     '西安市':610100, '铜川市':610200, '宝鸡市':610300, '咸阳市':610400, '渭南市':610500, '延安市':610600, '汉中市':610700, '榆林市':610800, '安康市':610900, '商洛市':611000, 
-    '兰州市':620100, '嘉峪关市':620200, '金昌市':620300, '白银市':620400, '天水市':620500, '武威市':620600, '张掖市':620700, '平凉市':620800, '酒泉市':620900, '庆阳市':621000, '定西市':621100, '陇南市':621200, '临夏回族自治州':622900, '甘南藏族自治州':623000, 
+    '兰州市':620100, '嘉峪关市':620200, '金昌市':620300, '白银市':620400, '天水市':620500, '武威市':620600, '张掖市':620700, '平凉市':620800, '酒泉市':620900, '庆阳市':621000, '定西市':621100, '陇南市':621200, '临夏州':622900, '甘南州':623000, 
     '西宁市':630100, '海东市':630200, '海北藏族自治州':632200, '黄南藏族自治州':632300, '海南藏族自治州':632500, '果洛藏族自治州':632600, '玉树藏族自治州':632700, '海西蒙古族藏族自治州':632800, 
     '银川市':640100, '石嘴山市':640200, '吴忠市':640300, '固原市':640400, '中卫市':640500, 
     '乌鲁木齐市':650100, '克拉玛依市':650200, '吐鲁番市':650400, '哈密市':650500, '昌吉回族自治州':652300, '博尔塔拉蒙古自治州':652700, '巴音郭楞蒙古自治州':652800, '阿克苏地区':652900, '克孜勒苏柯尔克孜自治州':653000, '喀什地区':653100, '和田地区':653200, '伊犁哈萨克自治州':654000, '塔城地区':654200, '阿勒泰地区':654300, 
@@ -69,7 +70,6 @@ province_name = {
     '香港特别行政区':'Hong Kong', '澳门特别行政区':'Macau'
 }
 
-
 def downloader(option, region, rtype, direction, startdate=0, enddate=0):
     if region in city_code.keys():
         rid = city_code[region]
@@ -81,20 +81,20 @@ def downloader(option, region, rtype, direction, startdate=0, enddate=0):
         end = datetime.strptime(enddate, '%Y%m%d')
         date_list = [int((start + timedelta(days=x)).strftime('%Y%m%d')) for x in range(0, (end-start).days)]
     
-    workbook = xlwt.Workbook(encoding = 'utf-8')
-    worksheet = workbook.add_sheet('Sheet', cell_overwrite_ok = True)
+    # workbook = xlwt.Workbook(encoding = 'utf-8')
+    # worksheet = workbook.add_sheet('Sheet', cell_overwrite_ok = True)
     
-    city_order = {}
-    worksheet.write(0 , 0 , label = 'city_code')
-    worksheet.write(0 , 1 , label = str(direction))
-    times = 1
-    for key , value in city_code.items():
-        worksheet.write(times , 0 , label = str(value))
-        worksheet.write(times , 1 , label = str(key))
-        city_order[str(key)] = times
-        times += 1
+    # city_order = {}
+    # worksheet.write(0 , 0 , label = 'city_code')
+    # worksheet.write(0 , 1 , label = str(direction))
+    # times = 1
+    # for key , value in city_code.items():
+    #     worksheet.write(times , 0 , label = str(value))
+    #     worksheet.write(times , 1 , label = str(key))
+    #     city_order[str(key)] = times
+    #     times += 1
 
-    for date in datelist:
+    for date in date_list:
         if option == 0:
             # city rank
             url = f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
@@ -133,6 +133,10 @@ def downloader(option, region, rtype, direction, startdate=0, enddate=0):
                 worksheet.write(city_order[str(city_name)] , counter_data , label = value)
             counter_data += 1
     workbook.save(f"data/{province_name[region]}-{direction}.xls")
+    with open(f'data/{province_name[region]}-{direction}.csv', 'w', ) as tmp_file:
+        wr = csv.writer(tmp_file, quoting=csv.QUOTE_ALL)
+        for word in yourList:
+            wr.writerow([word])
 
 
 def circu_exe_direction(region, rtype, rid):
