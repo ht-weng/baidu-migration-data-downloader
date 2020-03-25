@@ -165,12 +165,9 @@ def downloader(option, region, rtype='city', direction='in', startdate=0, enddat
         if data_dict['errmsg'] == 'SUCCESS':
             data_subdict = data_dict['data']['list']
             # time.sleep(1)
-            history_date = []
-            values = []
-            
-            for key, value in data_subdict:
-                history_date.append(int(key))
-                values.append(value)
+            history_date = list(data_subdict.keys())
+            history_date = [int(x) for x in history_date]
+            values = list(data_subdict.values())
             
             df = pd.DataFrame({'Date': history_date, 'Value': values})
             
@@ -193,12 +190,9 @@ def downloader(option, region, rtype='city', direction='in', startdate=0, enddat
         if data_dict['errmsg'] == 'SUCCESS':
             data_subdict = data_dict['data']['list']
             # time.sleep(1)
-            history_date = []
-            values = []
-            
-            for key, value in data_subdict:
-                history_date.append(int(key))
-                values.append(value)
+            history_date = list(data_subdict.keys())
+            history_date = [int(x) for x in history_date]
+            values = list(data_subdict.values())
             
             df = pd.DataFrame({'Date': history_date, 'Value': values})
             df.to_csv('data/internal/'+region_name+'.csv', index=False)
@@ -276,6 +270,7 @@ def downloader(option, region, rtype='city', direction='in', startdate=0, enddat
 
 def main():
     # downloader(1, '北京市', 'province', 'in', 20200101, 20200105)
+    # downloader(0, '北京市', 'city', 'in', 20200101, 20200105)
     
     # Download data for provinces' history curves
     for province in province_code.keys():
@@ -283,21 +278,22 @@ def main():
         downloader(2, province, 'province', 'out')
         print(province, ' Done')
     
+    # Download data for cities' internal flows
     for city in city_code.keys():
         downloader(3, city, 'city')
         print(city, ' Done')
     
-    # # Download data for all cities
-    # for city in city_code.keys():
-    #     downloader(0, city, 'city', 'in')
-    #     downloader(0, city, 'city', 'out')
-    #     print(city, ' Done')
+    # Download data for all cities
+    for city in city_code.keys():
+        downloader(0, city, 'city', 'in')
+        downloader(0, city, 'city', 'out')
+        print(city, ' Done')
     
-    # # Download data for all provinces
-    # for province in province_code.keys():
-    #     downloader(1, province, 'province', 'in')
-    #     downloader(1, province, 'province', 'out')
-    #     print(province, ' Done')
+    # Download data for all provinces
+    for province in province_code.keys():
+        downloader(1, province, 'province', 'in')
+        downloader(1, province, 'province', 'out')
+        print(province, ' Done')
 
     print('Download All Complete!')
 
