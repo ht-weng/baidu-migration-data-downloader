@@ -3,11 +3,13 @@
 # -*- coding: utf-8 -*-
 import requests
 from datetime import datetime, timedelta
+from datetime import date as dtdate
 import json
 import time
-import xlrd
-import xlwt
-import csv
+import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 
 city_code = {
@@ -52,9 +54,9 @@ province_code = {
     '北京市':110000, '天津市':120000, '河北省':130000, '山西省':140000, '内蒙古自治区':150000, 
     '辽宁省':210000, '吉林省':220000, '黑龙江省':230000, 
     '上海市':310000, '江苏省':320000, '浙江省':330000, '安徽省':340000, '福建省':350000, '江西省':360000, '山东省':370000, 
-    '河南省':410000, '湖北省':420000, '湖南省':430000, '广东省':440000, '广西自治区':450000, '海南省':460000, 
+    '河南省':410000, '湖北省':420000, '湖南省':430000, '广东省':440000, '广西壮族自治区':450000, '海南省':460000, 
     '重庆市':500000, '四川省':510000, '贵州省':520000, '云南省':530000, '西藏自治区':540000, 
-    '陕西省':610000, '甘肃省':620000, '青海省':630000, '宁夏自治区':640000, '新疆自治区':650000, 
+    '陕西省':610000, '甘肃省':620000, '青海省':630000, '宁夏回族自治区':640000, '新疆维吾尔自治区':650000, 
     '台湾省':710000, 
     '香港特别行政区':810000, '澳门特别行政区':820000
 }
@@ -63,23 +65,46 @@ province_name = {
     '北京市':'Beijing', '天津市':'Tianjin', '河北省':'Hebei', '山西省':'Shanxi', '内蒙古自治区':'Inner Mongolia', 
     '辽宁省':'Liaoning', '吉林省':'Jilin', '黑龙江省':'Heilongjiang', 
     '上海市':'Shanghai', '江苏省':'Jiangsu', '浙江省':'Zhejiang', '安徽省':'Anhui', '福建省':'Fujian', '江西省':'Jiangxi', '山东省':'Shandong', 
-    '河南省':'Henan', '湖北省':'Hubei', '湖南省':'Hunan', '广东省':'Guangdong', '广西自治区':'Guangxi', '海南省':'Hainan', 
+    '河南省':'Henan', '湖北省':'Hubei', '湖南省':'Hunan', '广东省':'Guangdong', '广西壮族自治区':'Guangxi', '海南省':'Hainan', 
     '重庆市':'Chongqing', '四川省':'Sichuan', '贵州省':'Guizhou', '云南省':'Yunnan', '西藏自治区':'Tibet', 
-    '陕西省':'Shaanxi', '甘肃省':'Gansu', '青海省':'Qinghai', '宁夏自治区':'Ningxia', '新疆自治区':'Xinjiang', 
+    '陕西省':'Shaanxi', '甘肃省':'Gansu', '青海省':'Qinghai', '宁夏回族自治区':'Ningxia', '新疆维吾尔自治区':'Xinjiang', 
     '台湾省':'Taiwan', 
     '香港特别行政区':'Hong Kong', '澳门特别行政区':'Macau'
 }
 
+def requests_retry_session(retries=3, backoff_factor=0.3, status_forcelist=(500, 502, 504), session=None):
+
+    session = session or requests.Session()
+    retry = Retry(
+        total=retries,
+        read=retries,
+        connect=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=status_forcelist,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+    return session
+
 def downloader(option, region, rtype, direction, startdate=0, enddate=0):
     if region in city_code.keys():
         rid = city_code[region]
+        # TODO: change province_name to city_name
+        region_name = province_name[region]
     elif region in province_code.keys():
         rid = province_code[region]
+        region_name = province_name[region]
+    
+    if startdate == 0:
+        startdate = 20200101
+    if enddate == 0:
+        enddate = dtdate.today().strftime('%Y%m%d')
     
     if option in (0, 1, 3):
-        start = datetime.strptime(startdate, '%Y%m%d')
-        end = datetime.strptime(enddate, '%Y%m%d')
-        date_list = [int((start + timedelta(days=x)).strftime('%Y%m%d')) for x in range(0, (end-start).days)]
+        start = datetime.strptime(str(startdate), '%Y%m%d')
+        end = datetime.strptime(str(enddate), '%Y%m%d')
+        date_list = [int((start + timedelta(days=x)).strftime('%Y%m%d')) for x in range(0, (end-start).days-1)]
     
     # workbook = xlwt.Workbook(encoding = 'utf-8')
     # worksheet = workbook.add_sheet('Sheet', cell_overwrite_ok = True)
@@ -94,107 +119,112 @@ def downloader(option, region, rtype, direction, startdate=0, enddate=0):
     #     city_order[str(key)] = times
     #     times += 1
 
+    df_list = []
+    
     for date in date_list:
         if option == 0:
             # city rank
             url = f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
-            print('city rank: ', region, '-', direction, '-', date)
+            print('city rank: ', region_name, '-', direction, '-', date)
         elif option == 1:
             # province rank
             url = f'http://huiyan.baidu.com/migration/provincerank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
-            print('province rank: ', region, '-', direction, '-', date)
+            print('province rank: ', region_name, '-', direction, '-', date)
         elif option == 2:
             # history curve
             url = f'http://huiyan.baidu.com/migration/historycurve.jsonp?dt={rtype}&id={rid}&type=move_{direction}'
-            print('history curve: ', region, '-', direction)
+            print('history curve: ', region_name, '-', direction)
         elif option == 3:
             # internal flow history
             url = f'http://huiyan.baidu.com/migration/internalflowhistory.jsonp?dt={rtype}&id={rid}&&date={date}'
-            print('internal flow history: ', region, '-', date)
+            print('internal flow history: ', region_name, '-', date)
         else:
             print('ERROR: Invalid Option!')
             return
-        
-        response = requests.get(url, timeout = 60)
+
+        # response = requests.get(url, timeout = 60)
+        response = requests_retry_session().get(url, timeout = 60)
         # time.sleep(1)
         r = response.text[3:-1]
         data_dict = json.loads(r)
         if data_dict['errmsg'] == 'SUCCESS':
             data_list = data_dict['data']['list']
             # time.sleep(1)
-            worksheet.write(0 , counter_data , label = date)
-            for a in range(len(city_code)):
-                worksheet.write(a+1 , counter_data , label = 0)
+            regions = []
+            values = []
             
             for i in range (len(data_list)):
-                city_name = data_list[i]['city_name']
+                if option == 0:
+                    region_chn = data_list[i]['city_name']
+                    # TODO: change province name to city name
+                    region_eng = province_name[region_chn]
+                elif option == 1:
+                    region_chn = data_list[i]['province_name']
+                    region_eng = province_name[region_chn]
+                else:
+                    print('TODO')
                 value = data_list[i]['value']
+                
+                regions.append(region_eng)
+                values.append(value)
             
-                worksheet.write(city_order[str(city_name)] , counter_data , label = value)
-            counter_data += 1
-    workbook.save(f"data/{province_name[region]}-{direction}.xls")
-    with open(f'data/{province_name[region]}-{direction}.csv', 'w', ) as tmp_file:
-        wr = csv.writer(tmp_file, quoting=csv.QUOTE_ALL)
-        for word in yourList:
-            wr.writerow([word])
+            if direction == 'in':
+                df = pd.DataFrame({'Origin': regions, date: values})
+            elif direction == 'out':
+                df = pd.DataFrame({'Destination': regions, date: values})
+            df_list.append(df)
+    
+    if direction == 'in':
+        if len(df_list) > 1:
+            df_all = pd.merge(df_list[0], df_list[1], on='Origin')
+            for i in range(2, len(df_list)):
+                df_all = pd.merge(df_all, df_list[i], on='Origin')
+        else:
+            df_all = df_list[0]
+    if direction == 'out':
+        if len(df_list) > 1:
+            df_all = pd.merge(df_list[0], df_list[1], on='Destination')
+            for i in range(2, len(df_list)):
+                df_all = pd.merge(df_all, df_list[i], on='Destination')
+        else:
+            df_all = df_list[0]
 
+    if option == 0:
+        if direction == 'in':
+            df_all.to_csv('data/city'+region_name+'-'+'Inbound.csv', index=False)
+        elif direction == 'out':
+            df_all.to_csv('data/city'+region_name+'-'+'Outbound.csv', index=False)
+    elif option == 1:
+        if direction == 'in':
+            df_all.to_csv('data/province'+region_name+'-'+'Inbound.csv', index=False)
+        elif direction == 'out':
+            df_all.to_csv('data/province'+region_name+'-'+'Outbound.csv', index=False)
+    elif option == 2:
+        if direction == 'in':
+            df_all.to_csv('data/history'+region_name+'-'+'Inbound.csv', index=False)
+        elif direction == 'out':
+            df_all.to_csv('data/history'+region_name+'-'+'Outbound.csv', index=False)
+    elif option == 3:
+        if direction == 'in':
+            df_all.to_csv('data/internal'+region_name+'-'+'Inbound.csv', index=False)
+        elif direction == 'out':
+            df_all.to_csv('data/internal'+region_name+'-'+'Outbound.csv', index=False)
+    else:
+        print('ERROR: Invalid Option!')
 
-def circu_exe_direction(region, rtype, rid):
-    mukous = ['in', 'out']
-    for mukou in mukous:
-        downloader(region, rtype, rid, mukou)
-    print(str(region)+' -- -', 'Done')
 
 def main():
-    
-    print('Download Complete!')
+    # downloader(1, '北京市', 'province', 'in', 20200101, 20200105)
+    # Download data for all provinces
+    for province in province_code.keys():
+        downloader(1, province, 'province', 'in')
+        downloader(1, province, 'province', 'out')
+        print(province, ' Done')
+
+    print('Download All Complete!')
 
 
 if __name__ == "__main__":
     main()
-    # circu_exe_direction('泰安市', 'city', -1)
-    # circu_exe_direction('威海市', 'city', -1)
-    # circu_exe_direction('昌吉回族自治州', 'city', -1)
-    # circu_exe_direction('全国', 'country', 0)
 
-    # circu_exe_direction('北京市', 'province', 110000)
-    # circu_exe_direction('天津市', 'province', 120000)
-    # circu_exe_direction('河北省', 'province', 130000)
-    # circu_exe_direction('山西省', 'province', 140000)
-    # circu_exe_direction('内蒙古自治区', 'province', 150000)
-
-    # circu_exe_direction('辽宁省', 'province', 210000)
-    # circu_exe_direction('吉林省', 'province', 220000)
-    # circu_exe_direction('黑龙江省', 'province', 230000)
-
-    # circu_exe_direction('上海市', 'province', 310000)
-    # circu_exe_direction('江苏省', 'province', 320000)
-    # circu_exe_direction('浙江省', 'province', 330000)
-    # circu_exe_direction('安徽省', 'province', 340000)
-    # circu_exe_direction('福建省', 'province', 350000)
-    # circu_exe_direction('江西省', 'province', 360000)
-    # circu_exe_direction('山东省', 'province', 370000)
-
-    # circu_exe_direction('河南省', 'province', 410000)
-    # circu_exe_direction('湖北省', 'province', 420000)
-    # circu_exe_direction('湖南省', 'province', 430000)
-    # circu_exe_direction('广东省', 'province', 440000)
-    # circu_exe_direction('广西自治区', 'province', 450000)
-    # circu_exe_direction('海南省', 'province', 460000)
-
-    # circu_exe_direction('重庆市', 'province', 500000)
-    # circu_exe_direction('四川省', 'province', 510000)
-    # circu_exe_direction('贵州省', 'province', 520000)
-    # circu_exe_direction('云南省', 'province', 530000)
-    # circu_exe_direction('西藏自治区', 'province', 540000)
-
-    # circu_exe_direction('陕西省', 'province', 610000)
-    # circu_exe_direction('甘肃省', 'province', 620000)
-    # circu_exe_direction('青海省', 'province', 630000)
-    # circu_exe_direction('宁夏自治区', 'province', 640000)
-    # circu_exe_direction('新疆自治区', 'province', 650000)
-
-    # circu_exe_direction('台湾省', 'province', 710000)
-    # circu_exe_direction('香港特别行政区', 'province', 810000)
-    # circu_exe_direction('澳门特别行政区', 'province', 820000)
     
