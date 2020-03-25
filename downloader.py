@@ -50,6 +50,44 @@ city_code = {
     '澳门特别行政区':820000
 }
 
+city_name = {
+    '北京市':'Beijing', 
+    '天津市':'Tianjin', 
+    '石家庄市':'Shijiazhuang', '唐山市':'Tangshan', '秦皇岛市':'Qinghuangdao', '邯郸市':'Handan', '邢台市':'Xingtai', '保定市':'Baoding', '张家口市':'Zhangjiakou', '承德市':'Chengde', '沧州市':'Cangzhou', '廊坊市':'Langfang', '衡水市':'Hengshui', 
+    '太原市':'Taiyuan', '大同市':'Datong', '阳泉市':'Yangquan', '长治市':'Changzhi', '晋城市':'Jincheng', '朔州市':'Shuozhou', '晋中市':'Jinzhong', '运城市':'Yuncheng', '忻州市':'Xinzhou', '临汾市':'Linfen', '吕梁市':'Lvliang', 
+    '呼和浩特市':'Hohhot', '包头市':'Baotou', '乌海市':'Wuhai', '赤峰市':'Chifeng', '通辽市':'Tongliao', '鄂尔多斯市':'Ordos', '呼伦贝尔市':'Hulunbuir', '巴彦淖尔市':'Bayannur', '乌兰察布市':'Ulanqab', '兴安盟':'Hinggan', '锡林郭勒盟':'Xilingol', '阿拉善盟':'Alxa', 
+    '沈阳市':'Shenyang', '大连市':'Dalian', '鞍山市':'Anshan', '抚顺市':'Fushun', '本溪市':'Benxi', '丹东市':'Dandong', '锦州市':'Jinzhou', '营口市':'Yingkou', '阜新市':'Fuxin', '辽阳市':'Liaoyang', '盘锦市':'Panjin', '铁岭市':'Tieling', '朝阳市':'Chaoyang', '葫芦岛市':'Huludao', 
+    '长春市':'Changchun', '吉林市':'Jinlin', '四平市':'Siping', '辽源市':'Liaoyuan', '通化市':'Tonghua', '白山市':'Baishan', '松原市':'Songyuan', '白城市':'Baicheng', '延边朝鲜族自治州':'Yanbian', 
+    '哈尔滨市':'Harbin', '齐齐哈尔市':'Qiqihar', '鸡西市':'Jixi', '鹤岗市':'Hegang', '双鸭山市':'Shuangyashan', '大庆市':'Daqing', '伊春市':'Yichun', '佳木斯市':'Jiamusi', '七台河市':'Qitaihe', '牡丹江市':'Mudanjiang', '黑河市':'Heihe', '绥化市':'Suihua', '大兴安岭地区':'Daxinganling', 
+    '上海市':'Shanghai', 
+    '南京市':'Nanjing', '无锡市':'Wuxi', '徐州市':'Xuzhou', '常州市':'Changzhou', '苏州市':'Suzhou', '南通市':'Nantong', '连云港市':'Lianyungang', '淮安市':'Huaian', '盐城市':'Yancheng', '扬州市':'Yangzhou', '镇江市':'Zhenjiang', '泰州市':'Taizhou', '宿迁市':'Suqian', 
+    '杭州市':'Hangzhou', '宁波市':'Ningbo', '温州市':'Wenzhou', '嘉兴市':'Jiaxing', '湖州市':'Huzhou', '绍兴市':'Shaoxing', '金华市':'Jinhua', '衢州市':'Quzhou', '舟山市':'Zhoushan', '台州市':'Taizhou', '丽水市':'Lishui', 
+    '合肥市':'Hefei', '芜湖市':'Wuhu', '蚌埠市':'Bengbu', '淮南市':'Huainan', '马鞍山市':'Maanshan', '淮北市':'Huaibei', '铜陵市':'Tongling', '安庆市':'Anqing', '黄山市':'Huangshan', '滁州市':'Chuzhou', '阜阳市':'Fuyang', '宿州市':'Suzhou', '六安市':'Liuan', '亳州市':'Haozhou', '池州市':'Chizhou', '宣城市':'Xuancheng', 
+    '福州市':'Fuzhou', '厦门市':'Xiamen', '莆田市':'Putian', '三明市':'Sanming', '泉州市':'Quanzhou', '漳州市':'Zhangzhou', '南平市':'Nanping', '龙岩市':'Longyan', '宁德市':'Ningde', 
+    '南昌市':'Nanchang', '景德镇市':'Jingdezhen', '萍乡市':'Pingxiang', '九江市':'Jiujiang', '新余市':'Xinyu', '鹰潭市':'Yingtan', '赣州市':'Ganzhou', '吉安市':'Jian', '宜春市':'Yichun', '抚州市':'Fuzhou', '上饶市':'Shangrao', 
+    '济南市':'Jinan', '青岛市':'Qingdao', '淄博市':'Zibo', '枣庄市':'Zaozhuang', '东营市':'Dongying', '烟台市':'Yantai', '潍坊市':'Weifang', '济宁市':'Jining', '泰安市':'Taian', '威海市':'Weihai', '日照市':'Rizhao', '临沂市':'Linyi', '德州市':'Dezhou', '聊城市':'Liaocheng', '滨州市':'Binzhou', '菏泽市':'Heze', 
+    '郑州市':'Zhengzhou', '开封市':'Kaifeng', '洛阳市':'Luoyang', '平顶山市':'Pingdingshan', '安阳市':'Anyang', '鹤壁市':'Hebi', '新乡市':'Xinxiang', '焦作市':'Jiaozuo', '濮阳市':'Puyang', '许昌市':'Xuchang', '漯河市':'Luohe', '三门峡市':'Sanmenxia', '南阳市':'Nanyang', '商丘市':'Shangqiu', '信阳市':'Xinyang', '周口市':'Zhoukou', '驻马店市':'Zhumadian', '济源市':'Jiyuan', 
+    '武汉市':'Wuhan', '黄石市':'Huangshi', '十堰市':'Shiyan', '宜昌市':'Yichang', '襄阳市':'Xiangyang', '鄂州市':'Ezhou', '荆门市':'Jingmen', '孝感市':'Xiaogan', '荆州市':'Jingzhou', '黄冈市':'Huanggang', '咸宁市':'Xianning', '随州市':'Suizhou', '恩施土家族苗族自治州':'Enshi', '仙桃市':'Xiantao', '潜江市':'Qianjiang', '天门市':'Tianmen', '神农架林区':'Shennongjia', 
+    '长沙市':'Changsha', '株洲市':'Zhuzhou', '湘潭市':'Xiangtan', '衡阳市':'Hengyang', '邵阳市':'Shaoyang', '岳阳市':'Yueyang', '常德市':'Changde', '张家界市':'Zhangjiajie', '益阳市':'Yiyang', '郴州市':'Chenzhou', '永州市':'Yongzhou', '怀化市':'Huaihua', '娄底市':'Loudi', '湘西土家族苗族自治州':'Xiangxi', 
+    '广州市':'Guangzhou', '韶关市':'Shaoguan', '深圳市':'Shenzhen', '珠海市':'Zhuhai', '汕头市':'Shantou', '佛山市':'Foshan', '江门市':'Jiangmen', '湛江市':'Zhanjiang', '茂名市':'Maoming', '肇庆市':'Zhaoqing', '惠州市':'Huizhou', '梅州市':'Meizhou', '汕尾市':'Shanwei', '河源市':'Heyuan', '阳江市':'Yangjiang', '清远市':'Qingyuan', '东莞市':'Dongguan', '中山市':'Zhongshan', '潮州市':'Chaozhou', '揭阳市':'Jieyang', '云浮市':'Yunfu', 
+    '南宁市':'Nanning', '柳州市':'Liuzhou', '桂林市':'Guilin', '梧州市':'Wuzhou', '北海市':'Beihai', '防城港市':'Fangchenggang', '钦州市':'Qinzhou', '贵港市':'Guigang', '玉林市':'Yulin', '百色市':'Baise', '贺州市':'Hezhou', '河池市':'Hechi', '来宾市':'Laibin', '崇左市':'Chongzuo', 
+    '海口市':'Haikou', '三亚市':'Sanya', '三沙市':'Sansha', '儋州市':'Danzhou', '五指山市':'Wuzhishan', '琼海市':'Qionghai', '文昌市':'Wenchang', '万宁市':'Wanning', '东方市':'Dongfang', '定安县':'Dingan', '屯昌县':'Tunchang', '澄迈县':'Chengmai', '临高县':'Lingao', '白沙黎族自治县':'Baisha', '昌江黎族自治县':'Changjiang', '乐东黎族自治县':'Ledong', '陵水黎族自治县':'Lingshui', '保亭黎族苗族自治县':'Baoting', '琼中黎族苗族自治县':'Qiongzhong', 
+    '重庆市':'Chongqing', 
+    '成都市':'Chengdu', '自贡市':'Zigong', '攀枝花市':'Panzhihua', '泸州市':'Luzhou', '德阳市':'Deyang', '绵阳市':'Mianyang', '广元市':'Guangyuan', '遂宁市':'Suining', '内江市':'Neijiang', '乐山市':'Leshan', '南充市':'Nanchong', '眉山市':'Meishan', '宜宾市':'Yibin', '广安市':'Guangan', '达州市':'Dazhou', '雅安市':'Yaan', '巴中市':'Bazhong', '资阳市':'Ziyang', '阿坝藏族羌族自治州':'Aba', '甘孜藏族自治州':'Ganzi', '凉山彝族自治州':'Liangshan', 
+    '贵阳市':'Guiyang', '六盘水市':'Liupanshui', '遵义市':'Zunyi', '安顺市':'Anshun', '毕节市':'Bijie', '铜仁市':'Tongren', '黔西南州':'Qianxinan', '黔东南州':'Qiandongnan', '黔南州':'Qiannan', 
+    '昆明市':'Kunming', '曲靖市':'Qujing', '玉溪市':'Yuxi', '保山市':'Baoshan', '昭通市':'Zhaotong', '丽江市':'Lijiang', '普洱市':'Puer', '临沧市':'Lincang', '楚雄彝族自治州':'Chuxiong', '红河哈尼族彝族自治州':'Honghe', '文山壮族苗族自治州':'Shanzhuang', '西双版纳傣族自治州':'Xishuangbanna', '大理白族自治州':'Dali', '德宏傣族景颇族自治州':'Dehong', '怒江傈僳族自治州':'Nujiang', '迪庆藏族自治州':'Diqing', 
+    '拉萨市':'Lhasa', '日喀则市':'Shigatse', '昌都市':'Chamdo', '林芝市':'Nyingchi', '山南市':'Shannan', '那曲市':'Nagqu', '阿里地区':'Ngari', 
+    '西安市':'Xian', '铜川市':'Tongchuan', '宝鸡市':'Baoji', '咸阳市':'Xianyang', '渭南市':'Weinan', '延安市':'Yanan', '汉中市':'Hanzhong', '榆林市':'Yulin', '安康市':'Ankang', '商洛市':'Shangluo', 
+    '兰州市':'Lanzhou', '嘉峪关市':'Jiayuguan', '金昌市':'Jinchang', '白银市':'Baiyin', '天水市':'Tianshui', '武威市':'Wuwei', '张掖市':'Zhangye', '平凉市':'Pingliang', '酒泉市':'Jiuquan', '庆阳市':'Qingyang', '定西市':'Dingxi', '陇南市':'Longnan', '临夏州':'Linxia', '甘南州':'Gannan', 
+    '西宁市':'Xining', '海东市':'Haidong', '海北藏族自治州':'Haibei', '黄南藏族自治州':'Huangnan', '海南藏族自治州':'Hainan', '果洛藏族自治州':'Guoluo', '玉树藏族自治州':'Yushu', '海西蒙古族藏族自治州':'Haixi', 
+    '银川市':'Yinchuan', '石嘴山市':'Shizuishan', '吴忠市':'Wuzhong', '固原市':'Guyuan', '中卫市':'Zhongwei', 
+    '乌鲁木齐市':'Urumqi', '克拉玛依市':'Karamay', '吐鲁番市':'Turpan', '哈密市':'Hami', '昌吉回族自治州':'Changji', '博尔塔拉蒙古自治州':'Bortala', '巴音郭楞蒙古自治州':'Bayingolin', '阿克苏地区':'Aksu', '克孜勒苏柯尔克孜自治州':'Kizilsu', '喀什地区':'Kashgar', '和田地区':'Hotan', '伊犁哈萨克自治州':'Ili', '塔城地区':'Tacheng', '阿勒泰地区':'Altay', 
+    '石河子市':'Shihezi', '阿拉尔市':'Alar', '图木舒克市':'Tumxuk', '五家渠市':'Wujiaqu', '北屯市':'Beitun', '铁门关市':'Tiemenguan', '双河市':'Shuanghe', '可克达拉市':'Kokdala', '昆玉市':'Kunyu', 
+    '台湾省':'Taiwan', 
+    '香港特别行政区':'HongKong', 
+    '澳门特别行政区':'Macau'
+}
+
 province_code = {
     '北京市':110000, '天津市':120000, '河北省':130000, '山西省':140000, '内蒙古自治区':150000, 
     '辽宁省':210000, '吉林省':220000, '黑龙江省':230000, 
@@ -87,14 +125,18 @@ def requests_retry_session(retries=3, backoff_factor=0.3, status_forcelist=(500,
     session.mount('https://', adapter)
     return session
 
-def downloader(option, region, rtype, direction, startdate=0, enddate=0):
-    if region in city_code.keys():
+# Core function for downloading data
+# Option: 0: city rank, 1: province rank, 2: history curve, 3: internal flow history
+def downloader(option, region, rtype='city', direction='in', startdate=0, enddate=0):
+    if rtype == 'city' and region in city_code.keys():
         rid = city_code[region]
-        # TODO: change province_name to city_name
-        region_name = province_name[region]
-    elif region in province_code.keys():
+        region_name = city_name[region]
+    elif rtype == 'province' and region in province_code.keys():
         rid = province_code[region]
         region_name = province_name[region]
+    else:
+        print('ERROR: Invalid Region Name!')
+        return
     
     if startdate == 0:
         startdate = 20200101
@@ -105,124 +147,159 @@ def downloader(option, region, rtype, direction, startdate=0, enddate=0):
         start = datetime.strptime(str(startdate), '%Y%m%d')
         end = datetime.strptime(str(enddate), '%Y%m%d')
         date_list = [int((start + timedelta(days=x)).strftime('%Y%m%d')) for x in range(0, (end-start).days-1)]
-    
-    # workbook = xlwt.Workbook(encoding = 'utf-8')
-    # worksheet = workbook.add_sheet('Sheet', cell_overwrite_ok = True)
-    
-    # city_order = {}
-    # worksheet.write(0 , 0 , label = 'city_code')
-    # worksheet.write(0 , 1 , label = str(direction))
-    # times = 1
-    # for key , value in city_code.items():
-    #     worksheet.write(times , 0 , label = str(value))
-    #     worksheet.write(times , 1 , label = str(key))
-    #     city_order[str(key)] = times
-    #     times += 1
 
+    # list to store dataframes of downloaded data
     df_list = []
     
-    for date in date_list:
-        if option == 0:
-            # city rank
-            url = f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
-            print('city rank: ', region_name, '-', direction, '-', date)
-        elif option == 1:
-            # province rank
-            url = f'http://huiyan.baidu.com/migration/provincerank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
-            print('province rank: ', region_name, '-', direction, '-', date)
-        elif option == 2:
-            # history curve
-            url = f'http://huiyan.baidu.com/migration/historycurve.jsonp?dt={rtype}&id={rid}&type=move_{direction}'
-            print('history curve: ', region_name, '-', direction)
-        elif option == 3:
-            # internal flow history
-            url = f'http://huiyan.baidu.com/migration/internalflowhistory.jsonp?dt={rtype}&id={rid}&&date={date}'
-            print('internal flow history: ', region_name, '-', date)
-        else:
-            print('ERROR: Invalid Option!')
-            return
-
+    
+    if option == 2:
+        # history curve
+        url = f'http://huiyan.baidu.com/migration/historycurve.jsonp?dt={rtype}&id={rid}&type=move_{direction}'
+        print('history curve: ', region_name, '-', direction)
+        
         # response = requests.get(url, timeout = 60)
         response = requests_retry_session().get(url, timeout = 60)
         # time.sleep(1)
         r = response.text[3:-1]
         data_dict = json.loads(r)
         if data_dict['errmsg'] == 'SUCCESS':
-            data_list = data_dict['data']['list']
+            data_subdict = data_dict['data']['list']
             # time.sleep(1)
-            regions = []
+            history_date = []
             values = []
             
-            for i in range (len(data_list)):
-                if option == 0:
-                    region_chn = data_list[i]['city_name']
-                    # TODO: change province name to city name
-                    region_eng = province_name[region_chn]
-                elif option == 1:
-                    region_chn = data_list[i]['province_name']
-                    region_eng = province_name[region_chn]
-                else:
-                    print('TODO')
-                value = data_list[i]['value']
-                
-                regions.append(region_eng)
+            for key, value in data_subdict:
+                history_date.append(int(key))
                 values.append(value)
             
+            df = pd.DataFrame({'Date': history_date, 'Value': values})
+            
             if direction == 'in':
-                df = pd.DataFrame({'Origin': regions, date: values})
+                df.to_csv('data/history/'+region_name+'-'+'Inbound.csv', index=False)
             elif direction == 'out':
-                df = pd.DataFrame({'Destination': regions, date: values})
-            df_list.append(df)
-    
-    if direction == 'in':
-        if len(df_list) > 1:
-            df_all = pd.merge(df_list[0], df_list[1], on='Origin')
-            for i in range(2, len(df_list)):
-                df_all = pd.merge(df_all, df_list[i], on='Origin')
-        else:
-            df_all = df_list[0]
-    if direction == 'out':
-        if len(df_list) > 1:
-            df_all = pd.merge(df_list[0], df_list[1], on='Destination')
-            for i in range(2, len(df_list)):
-                df_all = pd.merge(df_all, df_list[i], on='Destination')
-        else:
-            df_all = df_list[0]
-
-    if option == 0:
-        if direction == 'in':
-            df_all.to_csv('data/city'+region_name+'-'+'Inbound.csv', index=False)
-        elif direction == 'out':
-            df_all.to_csv('data/city'+region_name+'-'+'Outbound.csv', index=False)
-    elif option == 1:
-        if direction == 'in':
-            df_all.to_csv('data/province'+region_name+'-'+'Inbound.csv', index=False)
-        elif direction == 'out':
-            df_all.to_csv('data/province'+region_name+'-'+'Outbound.csv', index=False)
-    elif option == 2:
-        if direction == 'in':
-            df_all.to_csv('data/history'+region_name+'-'+'Inbound.csv', index=False)
-        elif direction == 'out':
-            df_all.to_csv('data/history'+region_name+'-'+'Outbound.csv', index=False)
+                df.to_csv('data/history/'+region_name+'-'+'Outbound.csv', index=False)
+        
     elif option == 3:
-        if direction == 'in':
-            df_all.to_csv('data/internal'+region_name+'-'+'Inbound.csv', index=False)
-        elif direction == 'out':
-            df_all.to_csv('data/internal'+region_name+'-'+'Outbound.csv', index=False)
+        # internal flow history
+        # Internal flow history query will return all data at once. So only send with the end date.
+        url = f'http://huiyan.baidu.com/migration/internalflowhistory.jsonp?dt={rtype}&id={rid}&&date={date_list[-1]}'
+        print('internal flow history: ', region_name)
+        
+        # response = requests.get(url, timeout = 60)
+        response = requests_retry_session().get(url, timeout = 60)
+        # time.sleep(1)
+        r = response.text[3:-1]
+        data_dict = json.loads(r)
+        if data_dict['errmsg'] == 'SUCCESS':
+            data_subdict = data_dict['data']['list']
+            # time.sleep(1)
+            history_date = []
+            values = []
+            
+            for key, value in data_subdict:
+                history_date.append(int(key))
+                values.append(value)
+            
+            df = pd.DataFrame({'Date': history_date, 'Value': values})
+            df.to_csv('data/internal/'+region_name+'.csv', index=False)
+        
     else:
-        print('ERROR: Invalid Option!')
+        for date in date_list:
+            if option == 0:
+                # city rank
+                url = f'http://huiyan.baidu.com/migration/cityrank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
+                print('city rank: ', region_name, '-', direction, '-', date)
+            elif option == 1:
+                # province rank
+                url = f'http://huiyan.baidu.com/migration/provincerank.jsonp?dt={rtype}&id={rid}&type=move_{direction}&date={date}'
+                print('province rank: ', region_name, '-', direction, '-', date)
+            else:
+                print('ERROR: Invalid Option!')
+                return
+
+            # response = requests.get(url, timeout = 60)
+            response = requests_retry_session().get(url, timeout = 60)
+            # time.sleep(1)
+            r = response.text[3:-1]
+            data_dict = json.loads(r)
+            if data_dict['errmsg'] == 'SUCCESS':
+                data_list = data_dict['data']['list']
+                # time.sleep(1)
+                regions = []
+                values = []
+                
+                for i in range (len(data_list)):
+                    if option == 0:
+                        region_chn = data_list[i]['city_name']
+                        region_eng = city_name[region_chn]
+                    elif option == 1:
+                        region_chn = data_list[i]['province_name']
+                        region_eng = province_name[region_chn]
+
+                    value = data_list[i]['value']
+                    
+                    regions.append(region_eng)
+                    values.append(value)
+                
+                if direction == 'in':
+                    df = pd.DataFrame({'Origin': regions, date: values})
+                elif direction == 'out':
+                    df = pd.DataFrame({'Destination': regions, date: values})
+                df_list.append(df)
+    
+        if direction == 'in':
+            if len(df_list) > 1:
+                df_all = pd.merge(df_list[0], df_list[1], on='Origin')
+                for i in range(2, len(df_list)):
+                    df_all = pd.merge(df_all, df_list[i], on='Origin')
+            else:
+                df_all = df_list[0]
+        if direction == 'out':
+            if len(df_list) > 1:
+                df_all = pd.merge(df_list[0], df_list[1], on='Destination')
+                for i in range(2, len(df_list)):
+                    df_all = pd.merge(df_all, df_list[i], on='Destination')
+            else:
+                df_all = df_list[0]
+
+        if option == 0:
+            if direction == 'in':
+                df_all.to_csv('data/city/'+region_name+'-'+'Inbound.csv', index=False)
+            elif direction == 'out':
+                df_all.to_csv('data/city/'+region_name+'-'+'Outbound.csv', index=False)
+        elif option == 1:
+            if direction == 'in':
+                df_all.to_csv('data/province/'+region_name+'-'+'Inbound.csv', index=False)
+            elif direction == 'out':
+                df_all.to_csv('data/province/'+region_name+'-'+'Outbound.csv', index=False)
 
 
 def main():
     # downloader(1, '北京市', 'province', 'in', 20200101, 20200105)
-    # Download data for all provinces
+    
+    # Download data for provinces' history curves
     for province in province_code.keys():
-        downloader(1, province, 'province', 'in')
-        downloader(1, province, 'province', 'out')
+        downloader(2, province, 'province', 'in')
+        downloader(2, province, 'province', 'out')
         print(province, ' Done')
+    
+    for city in city_code.keys():
+        downloader(3, city, 'city')
+        print(city, ' Done')
+    
+    # # Download data for all cities
+    # for city in city_code.keys():
+    #     downloader(0, city, 'city', 'in')
+    #     downloader(0, city, 'city', 'out')
+    #     print(city, ' Done')
+    
+    # # Download data for all provinces
+    # for province in province_code.keys():
+    #     downloader(1, province, 'province', 'in')
+    #     downloader(1, province, 'province', 'out')
+    #     print(province, ' Done')
 
     print('Download All Complete!')
-
 
 if __name__ == "__main__":
     main()
