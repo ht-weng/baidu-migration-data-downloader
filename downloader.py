@@ -288,11 +288,11 @@ def main():
     #     downloader(3, city, 'city')
     #     print(city, ' Done')
     
-    # Download data for all cities
-    for city in city_code.keys():
-        downloader(0, city, 'city', 'in')
-        downloader(0, city, 'city', 'out')
-        print(city, ' Done')
+    # # Download data for all cities
+    # for city in city_code.keys():
+    #     downloader(0, city, 'city', 'in')
+    #     downloader(0, city, 'city', 'out')
+    #     print(city, ' Done')
     
     # Download data for all provinces
     for province in province_code.keys():
